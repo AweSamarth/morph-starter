@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Morph Starter Template
+This is a starter [Next.js](https://nextjs.org/) template made for developers building on Morph. This app comes pre-configured with RainbowKit, wagmi, viem and a Foundry project. 
+
+By default, this app is set up to interact with a smart contract deployed on Morph testnet. You can find the address of this contract in `constants/constants.js` and its code in `foundry-app/src/QuoteOfTheDay.sol`. Jump to [this section](#working-with-foundry) to learn how to deploy your own contract on either Morph or a local blockchain.
 
 ## Getting Started
 
@@ -20,17 +23,50 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Working with Foundry
+### Pre-Requisites
+This starter app assumes you already have the Foundry toolchain installed. If you don't, please follow the instructions [here](https://book.getfoundry.sh/getting-started/installation.html). 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Deploying Smart Contracts Locally
+`cd` into the `foundry-app` directory and run the following command:
 
-## Deploy on Vercel
+```shell
+$ anvil
+```
+This will set up a local blockchain node and its RPC URL will be localhost:8545. Keep it running.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In the same terminal, you will see **10 generated account addresses along with their private keys**. Go to your MetaMask wallet / any other wallet and import one of these accounts using their corresponding private key. Remember these funds only exist on your local blockchain and are **not real**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Create a new `.env` file in `foundry-app` and paste the contents of env.example in it. Set the value of `FOUNDRY_GENERATED_PRIVATE_KEY` to be **the key you used in the above step**.
+
+Open a new terminal pointing to `foundry-app` and run the following command to set make variables in your .env file accessible via the terminal.
+```shell
+$ source .env
+```
+
+Deploy the smart contract on the local node using the following command:
+
+```shell
+$ forge create --rpc-url $FOUNDRY_RPC_URL --private-key $FOUNDRY_GENERATED_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay 
+```
+And BOOM! That's it! Your smart contract is now deployed on your local blockchain. Copy the address you see in the terminal (deployed to: 0x....) and paste it in `src/constants/constants.js` as the value of the `LOCAL_QOTD_CONTRACT_ADDRESS` variable for changes to be visible on the frontend. Now you can interact with the locally deployed smart contract using the Next.js app!
+
+### Deploying Smart Contracts on Morph Testnet
+If you open `src/constants/constants.js`, you will see that it uses a pre-deployed contract on the Morph testnet. If you want to deploy it yourself, make sure you have testnet Morph ETH in you dev account and follow the steps below.
+
+Create a new .env file in `foundry-app` and paste the contents of `.env.example` in it. Set the value of `DEV_ACCOUNT_PRIVATE_KEY` to be the private key of the account which has testnet Morph ETH.
+
+Open a new terminal pointing to `foundry-app` and run the following command to set make variables in your .env file accessible via the terminal.
+```shell
+$ source .env
+```
+
+Finally, deploy the smart contract on Morph testnet using the following command:
+
+```shell
+$ forge create --rpc-url $MORPH_TESTNET_RPC_URL --private-key $DEV_ACCOUNT_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay --legacy
+```
+
+Congratulations! Your smart contract is now deployed on Morph testnet. Copy the address you see in the terminal and paste it in `src/constants/constants.js` as the value of the `MORPH_QOTD_CONTRACT_ADDRESS` variable for changes to reflect on the frontend. Now you can interact with the deployed smart contract on Morph using the Next.js app!

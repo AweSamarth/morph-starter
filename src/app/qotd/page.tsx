@@ -112,8 +112,7 @@ export default function QOTD() {
       {!quoteOfTheDay && chainId == foundry.id ? (
         <div className="w-[28rem] mt-24 text-center">
           Contract not found. To set up a local blockchain node and
-          deploy your contract to it, refer to the README file in{" "}
-          <code>foundry-app</code>. Make sure you keep it running.
+          deploy your contract to it, refer to the README file of this app. Make sure you keep this node running.
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center gap-4">
@@ -171,10 +170,7 @@ export default function QOTD() {
       </div>
       )}
 
-      {/* <div className="  w-[50%] text-center -mt-3">
-        (Go to the <code>foundry-app</code> directory and refer to the ReadMe
-        file there to see how you can test contracts on a local blockchain)
-      </div> */}
+
     </main>
   );
 }
