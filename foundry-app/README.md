@@ -23,10 +23,10 @@ Deploy the smart contract on the local node using the following command:
 ```shell
 $ forge create --rpc-url $FOUNDRY_RPC_URL --private-key $FOUNDRY_GENERATED_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay 
 ```
-And BOOM! That's it! Your smart contract is now deployed on your local blockchain. Copy the address you see in the terminal (deployed to: 0x....) and paste it in `create-morph-app/src/constants` as the value of the `LOCAL_QOTD_CONTRACT_ADDRESS` variable for changes to be visible on the frontend. Now you can interact with the locally deployed smart contract using the Next.js app!
+And BOOM! That's it! Your smart contract is now deployed on your local blockchain. Copy the address you see in the terminal (deployed to: 0x....) and paste it in `../src/constants/constants.js` as the value of the `LOCAL_QOTD_CONTRACT_ADDRESS` variable for changes to be visible on the frontend. Now you can interact with the locally deployed smart contract using the Next.js app!
 
 ## Deploying Smart Contracts on Morph Testnet
-If you open `create-morph-app/src/constants/constants.js`, you will see that it uses a pre-deployed contract on the Morph testnet. If you want to deploy it yourself, make sure you have testnet Morph ETH in you dev account and follow the steps below.
+If you open `../src/constants/constants.js`, you will see that it uses a pre-deployed contract on the Morph testnet. If you want to deploy it yourself, make sure you have testnet Morph ETH in you dev account and follow the steps below.
 
 Create a new .env file in `foundry-app` and paste the contents of `.env.example` in it. Set the value of `DEV_ACCOUNT_PRIVATE_KEY` to be the private key of the account which has testnet Morph ETH.
 
@@ -41,7 +41,7 @@ Finally, deploy the smart contract on Morph testnet using the following command:
 $ forge create --rpc-url $MORPH_TESTNET_RPC_URL --private-key $DEV_ACCOUNT_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay --legacy
 ```
 
-Congratulations! Your smart contract is now deployed on Morph testnet. Copy the address you see in the terminal and paste it in `create-morph-app/src/constants` as the value of the `MORPH_QOTD_CONTRACT_ADDRESS` variable for changes to reflect on the frontend. Now you can interact with the deployed smart contract on Morph using the Next.js app!
+Congratulations! Your smart contract is now deployed on Morph testnet. Copy the address you see in the terminal and paste it in `../src/constants/constants.js` as the value of the `MORPH_QOTD_CONTRACT_ADDRESS` variable for changes to reflect on the frontend. Now you can interact with the deployed smart contract on Morph using the Next.js app!
 
 ## Foundry
 
