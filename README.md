@@ -49,7 +49,7 @@ $ source .env
 Deploy the smart contract on the local node using the following command:
 
 ```shell
-$ forge create --rpc-url $FOUNDRY_RPC_URL --private-key $FOUNDRY_GENERATED_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay 
+$ forge create --rpc-url $FOUNDRY_RPC_URL --private-key $FOUNDRY_GENERATED_PRIVATE_KEY src/QuoteOfTheDay.sol:QuoteOfTheDay --legacy
 ```
 And BOOM! That's it! Your smart contract is now deployed on your local blockchain. Copy the address you see in the terminal (deployed to: 0x....) and paste it in `src/constants/constants.js` as the value of the `LOCAL_QOTD_CONTRACT_ADDRESS` variable for changes to be visible on the frontend. Now you can interact with the locally deployed smart contract using the Next.js app!
 
