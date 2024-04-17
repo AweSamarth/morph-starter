@@ -45,7 +45,7 @@ export default function Home() {
         />
       </div>
       <div className="w-[80%] text-lg text-center  mt-8 mb-1">
-        Watch this page update as you edit <code>src/page.tsx</code>.<br />{" "}
+        Watch this page update as you edit <code>app/page.tsx</code>.<br />{" "}
         {!account.address&&<div>Connect your wallet to unlock a not-so-secret page where you can <br/> start
         interacting with smart contracts right away :&#41;</div>}{" "}
         {account.address&&chainId==morphSepolia.id&&<div>Not-so-secret page unlocked! 👇</div>}
